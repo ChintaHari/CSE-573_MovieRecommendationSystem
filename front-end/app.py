@@ -6,7 +6,7 @@ import pandas as pd
 import imdb
 from content_based_app import recommend
 
-app = Flask(__name__, static_folder='UI/static')
+app = Flask(__name__, static_folder='front-end/static')
 
 
 #app = Flask(__name__)
