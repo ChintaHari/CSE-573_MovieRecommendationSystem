@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation System</title>
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #ff6f69;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            font-size: 30px;
+            margin-top: 50px;
+        }
+        .swiper-container {
+            width: 60%;
+            margin-bottom: 20px;
+            position: relative; /* Ensure relative positioning for pagination placement */
+        }
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: 	#88d8b0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px; /* Add padding here */
+            box-sizing: border-box; /* Ensure padding is included in the width and height */
+            border-radius: 4px; /* Optional: to match the rounded corners of the images */
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%; /* Adjust for padding */
+            height: auto;
+        }
+
+        .swiper-button-prev, .swiper-button-next {
+            color: #ffcc5c; /* Adjust the color as needed */
+        }
+        .swiper{
+            padding: 50px;
+        }
+
+        .swiper-pagination-bullet{    
+            background: #ffcc5c;
+            opacity: 50%;
+        }
+        .swiper-pagination-bullet-active{   
+            opacity: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 style="color: #fff; text-align: center;">Recommended Movies</h1>
+    </header>
+
+    <!-- Matrix Factorization Carousel -->
+    <div class="swiper-container">
+        <h2 style="color: #010101; text-align: center;">Results using Matrix Factorization</h2>
+        <div class="swiper matrixSwiper">
+            <div class="swiper-wrapper">
+                <!-- Slides will be dynamically added here -->
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+
+    <!-- KNN Carousel -->
+    <div class="swiper-container">
+        <h2 style="color: #010101; text-align: center;">Results using KNN</h2>
+        <div class="swiper knnSwiper">
+            <div class="swiper-wrapper">
+                <!-- Slides will be dynamically added here -->
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+
+    <!-- Include Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    
+    <script>
+        // Movie data arrays
+        var matrixMovies = {{ matrix_data|tojson }};
+
+        var knnMovies = {{ knn_data|tojson }};
+
+        // Function to dynamically add slides to a swiper instance
+        function addSlidesToSwiper(swiperElement, movieUrls) {
+            const swiperWrapper = swiperElement.querySelector('.swiper-wrapper');
+            movieUrls.forEach((url) => {
+                const slide = document.createElement('div');
+                slide.className = 'swiper-slide';
+                const image = document.createElement('img');
+                image.src = url;
+                image.alt = 'Movie image';
+                slide.appendChild(image);
+                swiperWrapper.appendChild(slide);
+            });
+        }
+
+        // Initialize Swiper for Matrix Factorization after adding slides
+        addSlidesToSwiper(document.querySelector('.matrixSwiper'), matrixMovies);
+        const matrixSwiper = new Swiper('.matrixSwiper', {
+            slidesPerView: 3,
+            spaceBetween: 55,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+
+        // Initialize Swiper for KNN after adding slides
+        addSlidesToSwiper(document.querySelector('.knnSwiper'), knnMovies);
+        const knnSwiper = new Swiper('.knnSwiper', {
+            slidesPerView: 3,
+            spaceBetween: 55,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation System</title>
+    <style>
+        body {
+            /* color: #fff; */
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            background: #ff6f69;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            /*background: url("https://backgroundimages-asu.s3.amazonaws.com/bg1.png") no-repeat center center fixed;
+            background-size: cover;*/
+            /* padding: 5%; */
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            margin: 0;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+        }
+
+        .recommendation-label {
+            margin-bottom: 1.5rem;
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            /* width: 90%; */
+            max-width: 1200px;
+        }
+
+        .movie-card {    
+            border-radius: 5px;
+            border: 5px solid #ffeead;
+            padding: 0.5rem;
+            text-align: center;
+            background: #96ceb4;
+
+            /* box-shadow: rgba(255, 255, 255, 0.25) 0px 54px 55px, rgba(255, 255, 255, 0.12) 0px -12px 30px, rgba(255, 255, 255, 0.12) 0px 4px 6px, rgba(255, 255, 255, 0.17) 0px 12px 13px, rgba(255, 255, 255, 0.09) 0px -3px 5px; */
+        }
+
+        .movie-image {
+            width: 100%;
+            height: auto;
+            background-color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .movie-name {
+            margin: 0;
+            color: #010101;
+        }
+
+        @media (min-width: 600px) {
+            .movies-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1 style="color: #fff;">Recommendations based on the movie {{movie_name}}</h1>
+</div>
+  
+<main id="main">
+    <div class="movies-grid">
+        <!-- The movie cards will be generated here -->
+        {% for movie in movie_list %}
+        <div class="movie-card">
+            <img src="{{ movie.img_url }}" alt="{{ movie.movie_name }}" class="movie-image">
+            <p class="movie-name">{{ movie.movie_name }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            /*background: url("https://backgroundimages-asu.s3.amazonaws.com/bg1.png") no-repeat center center fixed;
+            background-size: cover;*/
+            /* padding: 5%; */
+            background: #ff6f69;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .box {
+            background: #ffeead;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            /* box-shadow: 0 4px 8px rgba(255,255,255,0.8); */
+            width: 90%;
+        }
+        h1, h2 {
+            text-align: center;
+            /* color: white; */
+        }
+        input.search {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-sizing: border-box;
+        }
+        button.search-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 20px;
+            background-color: #88d8b0;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button.search-btn:hover {
+            background-color: #96ceb4;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .box {
+                width: 90%;
+            }
+        }
+        .heading{
+            font-size: 48px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+        }
+        .overlay{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .holder{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="holder">
+            <div class="heading">Movie Recommendation System</div>
+            <div class="container">
+                <div class="box">
+                    <h2>Get movie recommendations</h2>
+                    <form action="/show_recommendation" method="post">
+                        <input type="text" class="search" name="user_id" id="user_id" placeholder="Enter User ID">
+                        <button class="search-btn" type="submit">Get Recommendations</button>
+                    </form>
+                </div>
+                <div class="box">
+                    <h2>Search by movie name</h2>
+                    <form action="/content_based" method="post">
+                        <input type="text" class="search" name="movie_name" id="movie_name" placeholder="Enter Movie Name">
+                        <button class="search-btn" type="submit">Get Recommendations</button>
+                    </form>
+                </div>
+            </div>
+        </div>    
+    </div>
+</body>
+</html>
