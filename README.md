@@ -19,7 +19,7 @@ Group 23: Fall 2023 Semester
 # clone the repo
 $ git clone https://github.com/ChintaHari/CSE-573_MovieRecommendationSystem.git
 
-# change the working directory to PosterPy
+# change the working directory to CSE-573_MovieRecommendationSystem
 $ cd CSE-573_MovieRecommendationSystem
 
 # install the requirements
